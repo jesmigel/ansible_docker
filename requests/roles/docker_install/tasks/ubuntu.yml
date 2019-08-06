@@ -43,7 +43,7 @@
   with_items:
     - "{{ repo_url }}"
 
-- name: "{{ common_task_name_install }}"
+- name: "{{ common_task_name_install_docker }}"
   become: true
   become_user: root
   apt:
