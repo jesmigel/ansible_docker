@@ -1,0 +1,4 @@
+# ubuntu.yml
+---
+- name: "{{ common_task_name_var_get }}"
+  include_vars: "{{ ansible_distribution | lower }}.yml"

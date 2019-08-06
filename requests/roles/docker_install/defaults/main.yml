@@ -1,0 +1,10 @@
+# main.yml
+# COMMON VARIABLES
+common_task_name_stdout: "STDOUT"
+common_task_name_var_get: "{{ ansible_distribution }} Gather Variables"
+common_task_name_gpg_get: "{{ ansible_distribution }} Procure GPG"
+common_task_name_gpg_verify: "{{ ansible_distribution }} GPG list verification"
+common_task_name_repo_url: "{{ ansible_distribution }} Add URL repo"
+common_task_name_install_dependencies: "{{ ansible_distribution }} install dependency packages"
+common_task_name_install_dependencies: "{{ ansible_distribution }} install base packages"
+common_task_name_diplay_log: "{{ ansible_distribution }} display updated binaries"

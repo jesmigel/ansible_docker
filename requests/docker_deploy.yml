@@ -1,0 +1,6 @@
+# binaries_install.yml
+---
+- name: Install Docker
+  hosts: all
+  roles:
+    - { role: docker_install }
