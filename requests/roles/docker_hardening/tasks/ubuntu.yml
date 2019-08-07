@@ -7,11 +7,12 @@
   become: true
   become_user: root
   group:
-    name: "{{ common_group_docker }}"
+    name: "{{ common_var_group_docker }}"
     state: present
 
 - name: "{{ common_task_name_group_member }}"
-  user: name={{ ansible_user_id }}
-        group={{ common_group_docker }}
-        groups=sudo
+  become: true
+  become_user: root
+  user: name=vagrant
+        groups={{ common_var_group_docker }}
         append=yes
