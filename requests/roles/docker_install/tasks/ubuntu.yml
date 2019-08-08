@@ -53,3 +53,10 @@
   with_subelements:
     - "{{ binaries_base }}"
     - install_list
+
+- name: "Remove AppArmor"
+  become: true
+  become_user: root
+  apt:
+    name: "apparmor"
+    state: absent
