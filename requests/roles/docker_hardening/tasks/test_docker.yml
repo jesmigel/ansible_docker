@@ -36,4 +36,4 @@
     image: "{{ common_var_test_docker_image }}"
     state: started
     ports:
-     - "8080:80"
+     - "{{ common_var_test_host_port }}:{{ common_var_test_container_port }}"
