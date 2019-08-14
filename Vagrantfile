@@ -27,7 +27,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "ansible" do |ansible|
     ansible.verbose = "v"
-    ansible.playbook = "./requests/docker_deploy.yml"
+    ansible.playbook = "./requests/docker_demo.yml"
     ansible.compatibility_mode = '2.0'
     ansible.extra_vars = { ansible_python_interpreter:"/usr/bin/python3" }
   end

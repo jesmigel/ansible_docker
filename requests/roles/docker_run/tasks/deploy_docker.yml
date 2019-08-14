@@ -1,28 +1,39 @@
 ---
-# - name: Import demo Payload
-#   include_vars: ../host_vars/demo.yml
+- name: Install pip3
+  become: true
+  become_user: root
+  apt:
+    name: python3-pip
+    state: latest # noqa 403
+  register: result
+
+- name: pip3 install docker
+  become: true
+  become_user: root
+  pip:
+    name: docker
 
 - name: "{{ common_task_name_test_pull_image }}"
+  become: true
+  become_user: root
   docker_image:
-    name: "{{ item.image_name }}"
+    name: "{{ common_var_test_docker_image }}"
     source: pull
-  with_items:
-      "{{ payload_docker_project }}"
 
-- name: "{{ common_task_name_start_ct }}"
+- name: "{{ common_task_name_create_ct }}"
+  become: true
+  become_user: root
   docker_container:
-    name: "{{ item.container_name }}"
-    image: "{{ item.image_name }}:{{ item.image_version }}"
-    ports: "{{ item.ports }}"
+    name: "{{ common_var_test_container_name }}"
+    image: "{{ common_var_test_docker_image }}"
     state: present
-  with_items:
-    - "{{ payload_docker_project }}"
 
 - name: "{{ common_task_name_start_ct }}"
+  become: true
+  become_user: root
   docker_container:
-    name: "{{ item.container_name }}"
-    image: "{{ item.image_name }}:{{ item.image_version }}"
-    ports: "{{ item.ports }}"
+    name: "{{ common_var_test_container_name }}"
+    image: "{{ common_var_test_docker_image }}"
     state: started
-  with_items:
-    - "{{ payload_docker_project }}"
+    ports:
+     - "8080:80"

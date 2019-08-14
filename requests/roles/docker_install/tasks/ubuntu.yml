@@ -9,6 +9,7 @@
   apt:
     name: "{{ item.1 }}"
     state: latest # noqa 403
+    force_apt_get: yes
   register: result
   with_subelements:
     - "{{ binaries_dependencies }}"
@@ -49,6 +50,7 @@
   apt:
     name: "{{ item.1 }}"
     state: latest # noqa 403
+    force_apt_get: yes
   register: result
   with_subelements:
     - "{{ binaries_base }}"
