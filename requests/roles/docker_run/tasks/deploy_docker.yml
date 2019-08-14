@@ -1,0 +1,28 @@
+---
+# - name: Import demo Payload
+#   include_vars: ../host_vars/demo.yml
+
+- name: "{{ common_task_name_test_pull_image }}"
+  docker_image:
+    name: "{{ item.image_name }}"
+    source: pull
+  with_items:
+      "{{ payload_docker_project }}"
+
+- name: "{{ common_task_name_start_ct }}"
+  docker_container:
+    name: "{{ item.container_name }}"
+    image: "{{ item.image_name }}:{{ item.image_version }}"
+    ports: "{{ item.ports }}"
+    state: present
+  with_items:
+    - "{{ payload_docker_project }}"
+
+- name: "{{ common_task_name_start_ct }}"
+  docker_container:
+    name: "{{ item.container_name }}"
+    image: "{{ item.image_name }}:{{ item.image_version }}"
+    ports: "{{ item.ports }}"
+    state: started
+  with_items:
+    - "{{ payload_docker_project }}"

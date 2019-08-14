@@ -1,0 +1,3 @@
+# main.yml
+---
+- include_tasks: "deploy_docker.yml"

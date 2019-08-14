@@ -1,0 +1,4 @@
+# COMMON VARIABLES
+common_task_name_test_pull_image: "Pull project docker image"
+common_task_name_create_ct: "Create project container"
+common_task_name_start_ct: "Start project container"
