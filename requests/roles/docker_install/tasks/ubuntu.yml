@@ -66,7 +66,7 @@
 - name: "{{ common_task_name_pip_install }}"
   pip:
     name: "{{ item }}"
-    executable: /user/bin/pip3
+    executable: /usr/bin/pip3
   with_items:
     - "{{ pip_dependencies }}"
 
