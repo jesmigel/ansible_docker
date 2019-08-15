@@ -1,8 +1,0 @@
-# docker_demo.yml
----
-- name: Docker deployment demo
-  hosts: all
-  roles:
-    - { role: docker_install }
-    - { role: docker_hardening }
-    - { role: docker_run, demo: true }
