@@ -65,10 +65,8 @@
 
 - name: "{{ common_task_name_pip_install }}"
   pip:
-    name: "{{ item }}"
+    name: ["{{ pip_dependencies }}"]
     executable: /usr/bin/pip3
-  with_items:
-    - "{{ pip_dependencies }}"
 
 - name: "Remove AppArmor"
   become: true
