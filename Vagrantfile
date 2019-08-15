@@ -81,7 +81,7 @@ Vagrant.configure("2") do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "ansible" do |ansible|
     ansible.verbose = "vv"
-    ansible.playbook = "./playbooks/docker_demo.yml"
+    ansible.playbook = "./test/docker_demo.yml"
     ansible.compatibility_mode = '2.0'
     ansible.extra_vars = { ansible_python_interpreter:"/usr/bin/python3" }
   end

@@ -1,0 +1,6 @@
+# docker_deploy
+---
+- name: Docker deployment demo
+  hosts: all
+  roles:
+    - { role: docker_run }

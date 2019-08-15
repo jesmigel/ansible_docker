@@ -1,8 +1,0 @@
-# main.yml
-# COMMON VARIABLES
-common_task_name_var_get: "{{ ansible_distribution }} Gather Variables"
-common_task_name_group_create: Creating docker group
-common_task_name_group_add: Adding docker group
-common_task_name_group_member: Add user "{{ansible_user_id}}" to docker group
-
-common_var_group_docker: docker
