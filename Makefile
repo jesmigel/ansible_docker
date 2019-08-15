@@ -12,5 +12,7 @@ docker_initialise:
 
 deploy: up
 
+deploy: up
+
 destroy:
 	vagrant destroy -f

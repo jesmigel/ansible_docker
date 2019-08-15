@@ -3,23 +3,12 @@
 - name: "{{ common_task_name_var_get }}"
   include_vars: "{{ ansible_distribution | lower }}.yml"
 
-- name: "{{ common_task_name_update }}"
-  become: true
-  become_user: root
-  apt:
-    upgrade: dist
-    update_cache: yes
-    autoremove: yes
-    autoclean: yes
-    force_apt_get: yes
-
 - name: "{{ common_task_name_install_dependencies }}"
   become: true
   become_user: root
   apt:
     name: "{{ item.1 }}"
     state: latest # noqa 403
-    force_apt_get: yes
   register: result
   with_subelements:
     - "{{ binaries_dependencies }}"
@@ -30,6 +19,7 @@
   become_user: root
   apt_key:
     url: "{{ item.url }}"
+  register: result
   with_items:
     - "{{ gpg_url }}"
 
@@ -39,6 +29,7 @@
   apt_key:
     id: "{{ item.key }}"
     state: present
+  register: result
   with_items:
     - "{{ gpg_key }}"
 
@@ -48,6 +39,7 @@
   apt_repository:
     repo: "{{ item.repo }}"
     state: present
+  register: result
   with_items:
     - "{{ repo_url }}"
 
@@ -57,15 +49,7 @@
   apt:
     name: "{{ item.1 }}"
     state: latest # noqa 403
-    force_apt_get: yes
   register: result
   with_subelements:
     - "{{ binaries_base }}"
     - install_list
-
-- name: "Remove AppArmor"
-  become: true
-  become_user: root
-  apt:
-    name: "apparmor"
-    state: absent

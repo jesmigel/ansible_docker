@@ -19,7 +19,6 @@ binaries_dependencies:
     - curl
     - gnupg-agent
     - software-properties-common
-    - python3-pip
 
 binaries_base:
   - name: Docker Community Edition
