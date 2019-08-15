@@ -11,3 +11,7 @@ common_task_name_install_docker: "{{ ansible_distribution }} install docker"
 common_task_name_diplay_log: "{{ ansible_distribution }} display updated binaries"
 
 common_task_name_pip_install: Install ansible pip dependencies
+
+pip_dependencies:
+  - requests
+  - docker
