@@ -3,7 +3,7 @@ common_task_name_test_pull_image: "Pull project docker image"
 common_task_name_create_ct: "Create project container"
 common_task_name_start_ct: "Start project container"
 
-demo_var_docker_image: nginx:latest
-demo_var_container_name: test_nginx_latest
-demo_var_container_ports:
-  - "8080:80"
+# demo_var_docker_image: nginx:latest
+# demo_var_container_name: test_nginx_latest
+# demo_var_container_ports:
+#   - "8080:80"
