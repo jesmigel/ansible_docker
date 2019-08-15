@@ -1,0 +1,27 @@
+# UBUNTU binary variables
+gpg_url:
+  - name: Docker Ubuntu GPG
+    url: https://download.docker.com/linux/ubuntu/gpg
+
+gpg_key:
+  - name: Docker
+    key: 0EBFCD88
+
+repo_url:
+  - name: Docker CE Stable Release
+    repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ansible_distribution_release}} stable
+
+binaries_dependencies:
+  - name: Docker Community Edition
+    install_list:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - gnupg-agent
+    - software-properties-common
+    - python3-pip
+
+binaries_base:
+  - name: Docker Community Edition
+    install_list:
+    - docker-ce

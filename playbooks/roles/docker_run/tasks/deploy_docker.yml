@@ -1,0 +1,24 @@
+---
+- name: "{{ common_task_name_test_pull_image }}"
+  become: true
+  become_user: root
+  docker_image:
+    name: "{{ demo_var_docker_image }}"
+    source: pull
+
+- name: "{{ common_task_name_create_ct }}"
+  become: true
+  become_user: root
+  docker_container:
+    name: "{{ demo_var_container_name }}"
+    image: "{{ demo_var_docker_image }}"
+    state: present
+
+- name: "{{ common_task_name_start_ct }}"
+  become: true
+  become_user: root
+  docker_container:
+    name: "{{ demo_var_container_name }}"
+    image: "{{ demo_var_docker_image }}"
+    state: started
+    ports: "{{ demo_var_container_ports }}"

@@ -1,0 +1,78 @@
+# ubuntu.yml
+---
+- name: "{{ common_task_name_var_get }}"
+  include_vars: "{{ ansible_distribution | lower }}.yml"
+
+- name: "{{ common_task_name_update }}"
+  become: true
+  become_user: root
+  apt:
+    upgrade: dist
+    update_cache: yes
+    autoremove: yes
+    autoclean: yes
+    force_apt_get: yes
+
+- name: "{{ common_task_name_install_dependencies }}"
+  become: true
+  become_user: root
+  apt:
+    name: "{{ item.1 }}"
+    state: latest # noqa 403
+    force_apt_get: yes
+  register: result
+  with_subelements:
+    - "{{ binaries_dependencies }}"
+    - install_list
+
+- name: "{{ common_task_name_gpg_get }}"
+  become: true
+  become_user: root
+  apt_key:
+    url: "{{ item.url }}"
+  with_items:
+    - "{{ gpg_url }}"
+
+- name: "{{ common_task_name_gpg_verify }}"
+  become: true
+  become_user: root
+  apt_key:
+    id: "{{ item.key }}"
+    state: present
+  with_items:
+    - "{{ gpg_key }}"
+
+- name: "{{ common_task_name_repo_url }}"
+  become: true
+  become_user: root
+  apt_repository:
+    repo: "{{ item.repo }}"
+    state: present
+  with_items:
+    - "{{ repo_url }}"
+
+- name: "{{ common_task_name_install_docker }}"
+  become: true
+  become_user: root
+  apt:
+    name: "{{ item.1 }}"
+    state: latest # noqa 403
+    force_apt_get: yes
+  register: result
+  with_subelements:
+    - "{{ binaries_base }}"
+    - install_list
+
+- name: "{{ common_task_name_pip_install }}"
+  pip:
+    name: "{{ item }}"
+    executable: /usr/bin/pip3
+  with_items:
+    - "{{ pip_dependencies }}"
+
+- name: "Remove AppArmor"
+  become: true
+  become_user: root
+  apt:
+    name: "apparmor"
+    state: absent
