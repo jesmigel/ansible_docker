@@ -1,0 +1,7 @@
+# binaries_install.yml
+---
+- name: Deploy Docker
+  hosts: all
+  roles:
+    - { role: docker_install }
+    - { role: docker_hardening }
