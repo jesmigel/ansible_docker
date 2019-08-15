@@ -13,6 +13,6 @@
 - name: "{{ common_task_name_group_member }}"
   become: true
   become_user: root
-  user: name=vagrant
+  user: name=root
         groups={{ common_var_group_docker }}
         append=yes

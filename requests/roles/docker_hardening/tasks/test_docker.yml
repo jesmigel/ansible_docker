@@ -1,12 +1,4 @@
 ---
-- name: Install pip3
-  become: true
-  become_user: root
-  apt:
-    name: python3-pip
-    state: latest # noqa 403
-  register: result
-
 - name: pip3 install docker
   become: true
   become_user: root

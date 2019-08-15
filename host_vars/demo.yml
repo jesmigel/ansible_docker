@@ -1,0 +1,8 @@
+# demo extra vars
+---
+payload_docker_project:
+  - image_name: 'docker.bintray.io/jfrog/artifactory-cpp-ce'
+    image_version: 'latest'
+    container_name: demo_artifactory
+    ports:
+    - 8080:8080

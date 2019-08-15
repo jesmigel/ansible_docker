@@ -23,14 +23,7 @@ Vagrant.configure("2") do |config|
   # Disable the new default behavior introduced in Vagrant 1.7, to
   # ensure that all Vagrant machines will use the same SSH key pair.
   # See https://github.com/hashicorp/vagrant/issues/5005
-  config.ssh.insert_key = false
-
-  config.vm.provision "ansible" do |ansible|
-    ansible.verbose = "v"
-    ansible.playbook = "./requests/docker_deploy.yml"
-    ansible.compatibility_mode = '2.0'
-    ansible.extra_vars = { ansible_python_interpreter:"/usr/bin/python3" }
-  end
+  # config.ssh.insert_key = false
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -62,7 +55,7 @@ Vagrant.configure("2") do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
-
+ 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
@@ -77,8 +70,21 @@ Vagrant.configure("2") do |config|
   #
   # View the documentation for the provider you are using for more
   # information on available options.
-
+  # config.vm.provider "virtualbox" do |vb|
+  #   vb.customize ["modifyvm", :id, "--nictype1", "virtio"]        
+  # end
+  config.vm.provider "virtualbox" do |v|
+    v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+  end
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
+  config.vm.provision "ansible" do |ansible|
+    ansible.verbose = "vv"
+    ansible.playbook = "./requests/docker_deploy.yml"
+    ansible.compatibility_mode = '2.0'
+    ansible.extra_vars = { ansible_python_interpreter:"/usr/bin/python3" }
+  end
+
 end
